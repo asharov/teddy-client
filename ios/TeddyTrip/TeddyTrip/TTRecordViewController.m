@@ -26,11 +26,12 @@
 	// Do any additional setup after loading the view, typically from a nib.
     _locationManager = [[CLLocationManager alloc] init];
     _locationProvider = [[TTLocationProvider alloc] initWithLocationManager:_locationManager];
-    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider timeProvider:[[TTTimeProvider alloc] init]];
+    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider timeProvider:[[TTTimeProvider alloc] initWithChangeInterval:1]];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(didStartRecording:) name:kDidStartRecordingNotification object:nil];
-    [center addObserver:self selector:@selector(didStopRecording:) name:kDidStopRecordingNotification object:nil];
-    [center addObserver:self selector:@selector(distanceDidChange:) name:kDistanceDidChangeNotification object:nil];
+    [center addObserver:self selector:@selector(didStartRecording:) name:kDidStartRecordingNotification object:_recorder];
+    [center addObserver:self selector:@selector(didStopRecording:) name:kDidStopRecordingNotification object:_recorder];
+    [center addObserver:self selector:@selector(distanceDidChange:) name:kDistanceDidChangeNotification object:_recorder];
+    [center addObserver:self selector:@selector(durationDidChange:) name:kDurationDidChangeNotification object:_recorder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +66,12 @@
 {
     NSNumber *distance = [[note userInfo] objectForKey:kUserInfoDistanceKey];
     [[self distanceLabel] setText:[NSString stringWithFormat:@"%.0f m", [distance doubleValue]]];
+}
+
+- (void)durationDidChange:(NSNotification *)note
+{
+    NSNumber *duration = [[note userInfo] objectForKey:kUserInfoDurationKey];
+    [[self durationLabel] setText:[NSString stringWithFormat:@"%llu s", [duration unsignedLongLongValue] / 1000]];
 }
 
 @end

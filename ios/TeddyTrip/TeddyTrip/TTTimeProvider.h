@@ -18,6 +18,8 @@
 
 @property (weak) id<TTTimeProviderDelegate> delegate;
 
+- (id)initWithChangeInterval:(NSTimeInterval)interval;
+
 - (NSDate *)currentTime;
 
 @end
