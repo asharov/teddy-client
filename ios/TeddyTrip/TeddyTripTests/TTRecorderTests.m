@@ -164,4 +164,10 @@
     XCTAssertEqual(3, _recorderDistanceCount);
 }
 
+- (void)testRecordingHasZeroDurationAtStart
+{
+    [_recorder start];
+    XCTAssertEqual((uint64_t)0, [_recorder durationMilliseconds]);
+}
+
 @end

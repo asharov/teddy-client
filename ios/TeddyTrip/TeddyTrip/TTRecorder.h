@@ -18,6 +18,7 @@ static NSString * const kUserInfoDistanceKey = @"distance";
 
 @property (readonly) BOOL isRecording;
 @property (readonly) double distanceMeters;
+@property (readonly) uint64_t durationMilliseconds;
 @property (readonly) NSArray *trace;
 
 - (id)initWithLocationProvider:(TTLocationProvider *)locationProvider;
