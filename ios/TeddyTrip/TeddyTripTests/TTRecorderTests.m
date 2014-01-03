@@ -187,11 +187,17 @@
     XCTAssertEqual((uint64_t)500, [_recorder durationMilliseconds]);
 }
 
+- (void)testRecorderNotifiesOfDurationChangeOnStart
+{
+    [_recorder start];
+    XCTAssertEqual(1, _recorderDurationCount);
+}
+
 - (void)testRecorderNotifiesOfDurationChange
 {
     [_recorder start];
     [_timeProvider advance:500];
-    XCTAssertEqual(1, _recorderDurationCount);
+    XCTAssertEqual(2, _recorderDurationCount);
 }
 
 @end

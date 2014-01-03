@@ -63,6 +63,7 @@
         _startTime = [_timeProvider currentTime];
         [[NSNotificationCenter defaultCenter] postNotificationName:kDidStartRecordingNotification object:self];
         [self postCurrentDistance];
+        [self postCurrentDuration];
     }
 }
 
@@ -80,6 +81,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kDistanceDidChangeNotification object:self userInfo:distanceData];
 }
 
+- (void)postCurrentDuration
+{
+    NSDictionary *durationData = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedLongLong:[self durationMilliseconds]] forKey:kUserInfoDurationKey];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDurationDidChangeNotification object:self userInfo:durationData];
+}
+
 - (void)didReceiveLocation:(CLLocation*)location
 {
     if (_isRecording) {
@@ -91,8 +98,7 @@
 - (void)timeDidChange:(NSDate *)currentTime
 {
     if (_isRecording) {
-        NSDictionary *durationData = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedLongLong:[self durationMilliseconds]] forKey:kUserInfoDurationKey];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDurationDidChangeNotification object:self userInfo:durationData];
+        [self postCurrentDuration];
     }
 }
 
