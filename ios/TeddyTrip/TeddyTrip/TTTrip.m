@@ -13,6 +13,7 @@
 {
     NSString *_name;
     double _distanceMeters;
+    uint64_t _durationMilliseconds;
 }
 
 @end
@@ -25,6 +26,7 @@
     if (self) {
         _name = name;
         _distanceMeters = [recorder distanceMeters];
+        _durationMilliseconds = [recorder durationMilliseconds];
     }
     return self;
 }
@@ -37,6 +39,11 @@
 - (double)distanceMeters
 {
     return _distanceMeters;
+}
+
+- (uint64_t)durationMilliseconds
+{
+    return _durationMilliseconds;
 }
 
 @end

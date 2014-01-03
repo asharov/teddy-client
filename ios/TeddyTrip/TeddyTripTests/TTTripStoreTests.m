@@ -18,6 +18,7 @@
     TTTripStore *_tripStore;
     TTRecorder *_recorder;
     TTMockLocationProvider *_locationProvider;
+    TTMockTimeProvider *_timeProvider;
     int _addNewTripCount;
 }
 
@@ -35,7 +36,8 @@
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
     _locationProvider = [[TTMockLocationProvider alloc] init];
-    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider timeProvider:[[TTMockTimeProvider alloc] init]];
+    _timeProvider = [[TTMockTimeProvider alloc] init];
+    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider timeProvider:_timeProvider];
     _tripStore = [[TTTripStore alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAddNewTrip:) name:kDidAddNewTripNotification object:_tripStore];
 }
@@ -99,12 +101,20 @@
     XCTAssertEqual(1, _addNewTripCount);
 }
 
+- (void)testTripStoreRecordedTripHasCorrectDuration
+{
+    [self recordTrip:1];
+    TTTrip *trip = [_tripStore tripAtIndex:0];
+    XCTAssertEqual([_recorder durationMilliseconds], [trip durationMilliseconds]);
+}
+
 - (void)recordTrip:(int)length
 {
     CLLocation *firstLocation = [[CLLocation alloc] initWithLatitude:53.2 longitude:13.4];
     CLLocation *secondLocation = [[CLLocation alloc] initWithLatitude:53.3 longitude:13.3];
     CLLocation *thirdLocation = [[CLLocation alloc] initWithLatitude:53.4 longitude:13.2];
     [_recorder start];
+    [_timeProvider advance:length * 500];
     if (length > 0) {
         [_locationProvider addLocation:firstLocation];
         if (length > 1) {

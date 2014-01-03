@@ -16,5 +16,6 @@
 
 - (NSString*)name;
 - (double)distanceMeters;
+- (uint64_t)durationMilliseconds;
 
 @end
