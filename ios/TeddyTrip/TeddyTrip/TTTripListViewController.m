@@ -78,7 +78,7 @@ static NSString * const kCellReuseIdentifier = @"TripCell";
     
     TTTrip *trip = [[self tripStore] tripAtIndex:[indexPath row]];
     [[cell textLabel] setText:[trip name]];
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%.0f m", [trip distanceMeters]]];
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%.0f m, %llu s", [trip distanceMeters], [trip durationMilliseconds] / 1000]];
     
     return cell;
 }
