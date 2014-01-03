@@ -29,6 +29,7 @@
         _trace = [[NSMutableArray alloc] init];
         [locationProvider setDelegate:self];
         _timeProvider = timeProvider;
+        [_timeProvider setDelegate:self];
     }
     return self;
 }
@@ -84,6 +85,14 @@
     if (_isRecording) {
         [_trace addObject:location];
         [self postCurrentDistance];
+    }
+}
+
+- (void)timeDidChange:(NSDate *)currentTime
+{
+    if (_isRecording) {
+        NSDictionary *durationData = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedLongLong:[self durationMilliseconds]] forKey:kUserInfoDurationKey];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDurationDidChangeNotification object:self userInfo:durationData];
     }
 }
 

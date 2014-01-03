@@ -13,9 +13,11 @@
 static NSString * const kDidStartRecordingNotification = @"TTDidStartRecording";
 static NSString * const kDidStopRecordingNotification = @"TTDidStopRecording";
 static NSString * const kDistanceDidChangeNotification = @"TTDistanceDidChange";
+static NSString * const kDurationDidChangeNotification = @"TTDurationDidChange";
 static NSString * const kUserInfoDistanceKey = @"distance";
+static NSString * const kUserInfoDurationKey = @"duration";
 
-@interface TTRecorder : NSObject <TTLocationProviderDelegate>
+@interface TTRecorder : NSObject <TTLocationProviderDelegate, TTTimeProviderDelegate>
 
 @property (readonly) BOOL isRecording;
 @property (readonly) double distanceMeters;

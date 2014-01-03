@@ -20,6 +20,9 @@
 - (void)advance:(uint32_t)milliseconds
 {
     _currentTimeMilliseconds += milliseconds;
+    if ([self delegate]) {
+        [[self delegate] timeDidChange:[self currentTime]];
+    }
 }
 
 - (NSDate *)currentTime

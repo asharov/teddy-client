@@ -8,7 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol TTTimeProviderDelegate <NSObject>
+
+- (void)timeDidChange:(NSDate *)currentTime;
+
+@end
+
 @interface TTTimeProvider : NSObject
+
+@property (weak) id<TTTimeProviderDelegate> delegate;
 
 - (NSDate *)currentTime;
 

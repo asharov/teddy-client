@@ -19,6 +19,7 @@
     int _recorderStartCount;
     int _recorderStopCount;
     int _recorderDistanceCount;
+    int _recorderDurationCount;
 }
 
 @end
@@ -40,6 +41,11 @@
     _recorderDistanceCount += 1;
 }
 
+- (void)durationDidChange:(NSNotification*)note
+{
+    _recorderDurationCount += 1;
+}
+
 - (void)setUp
 {
     [super setUp];
@@ -51,6 +57,7 @@
     [center addObserver:self selector:@selector(didStartRecording:) name:kDidStartRecordingNotification object:_recorder];
     [center addObserver:self selector:@selector(didStopRecording:) name:kDidStopRecordingNotification object:_recorder];
     [center addObserver:self selector:@selector(distanceDidChange:) name:kDistanceDidChangeNotification object:_recorder];
+    [center addObserver:self selector:@selector(durationDidChange:) name:kDurationDidChangeNotification object:_recorder];
 }
 
 - (void)tearDown
@@ -178,6 +185,13 @@
     [_recorder start];
     [_timeProvider advance:500];
     XCTAssertEqual((uint64_t)500, [_recorder durationMilliseconds]);
+}
+
+- (void)testRecorderNotifiesOfDurationChange
+{
+    [_recorder start];
+    [_timeProvider advance:500];
+    XCTAssertEqual(1, _recorderDurationCount);
 }
 
 @end
