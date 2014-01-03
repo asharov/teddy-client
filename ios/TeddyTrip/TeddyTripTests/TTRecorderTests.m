@@ -9,10 +9,12 @@
 #import <XCTest/XCTest.h>
 #import "TTRecorder.h"
 #import "TTMockLocationProvider.h"
+#import "TTMockTimeProvider.h"
 
 @interface TTRecorderTests : XCTestCase
 {
     TTMockLocationProvider *_locationProvider;
+    TTMockTimeProvider *_timeProvider;
     TTRecorder *_recorder;
     int _recorderStartCount;
     int _recorderStopCount;
@@ -43,7 +45,8 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     _locationProvider = [[TTMockLocationProvider alloc] init];
-    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider];
+    _timeProvider = [[TTMockTimeProvider alloc] init];
+    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider timeProvider:_timeProvider];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didStartRecording:) name:kDidStartRecordingNotification object:_recorder];
     [center addObserver:self selector:@selector(didStopRecording:) name:kDidStopRecordingNotification object:_recorder];
@@ -168,6 +171,13 @@
 {
     [_recorder start];
     XCTAssertEqual((uint64_t)0, [_recorder durationMilliseconds]);
+}
+
+- (void)testRecordingDurationIncreasesWithTime
+{
+    [_recorder start];
+    [_timeProvider advance:500];
+    XCTAssertEqual((uint64_t)500, [_recorder durationMilliseconds]);
 }
 
 @end

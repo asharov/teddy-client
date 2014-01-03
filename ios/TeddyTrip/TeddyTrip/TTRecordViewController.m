@@ -26,7 +26,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     _locationManager = [[CLLocationManager alloc] init];
     _locationProvider = [[TTLocationProvider alloc] initWithLocationManager:_locationManager];
-    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider];
+    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider timeProvider:[[TTTimeProvider alloc] init]];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didStartRecording:) name:kDidStartRecordingNotification object:nil];
     [center addObserver:self selector:@selector(didStopRecording:) name:kDidStopRecordingNotification object:nil];

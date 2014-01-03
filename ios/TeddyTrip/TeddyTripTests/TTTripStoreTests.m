@@ -11,6 +11,7 @@
 #import "TTRecorder.h"
 #import "TTTrip.h"
 #import "TTMockLocationProvider.h"
+#import "TTMockTimeProvider.h"
 
 @interface TTTripStoreTests : XCTestCase
 {
@@ -34,7 +35,7 @@
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
     _locationProvider = [[TTMockLocationProvider alloc] init];
-    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider];
+    _recorder = [[TTRecorder alloc] initWithLocationProvider:_locationProvider timeProvider:[[TTMockTimeProvider alloc] init]];
     _tripStore = [[TTTripStore alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didAddNewTrip:) name:kDidAddNewTripNotification object:_tripStore];
 }

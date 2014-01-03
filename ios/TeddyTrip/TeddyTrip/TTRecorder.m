@@ -11,7 +11,9 @@
 @implementation TTRecorder
 {
     BOOL _isRecording;
+    NSDate *_startTime;
     NSMutableArray *_trace;
+    TTTimeProvider *_timeProvider;
 }
 
 - (NSArray *)trace
@@ -19,13 +21,14 @@
     return _trace;
 }
 
-- (id)initWithLocationProvider:(TTLocationProvider *)locationProvider
+- (id)initWithLocationProvider:(TTLocationProvider *)locationProvider timeProvider:(TTTimeProvider *)timeProvider
 {
     self = [super init];
     
     if (self) {
         _trace = [[NSMutableArray alloc] init];
         [locationProvider setDelegate:self];
+        _timeProvider = timeProvider;
     }
     return self;
 }
@@ -46,11 +49,17 @@
     return distance;
 }
 
+- (uint64_t)durationMilliseconds
+{
+    return [[_timeProvider currentTime] timeIntervalSinceDate:_startTime] * 1000;
+}
+
 - (void)start
 {
     if (!_isRecording) {
         _isRecording = YES;
         [_trace removeAllObjects];
+        _startTime = [_timeProvider currentTime];
         [[NSNotificationCenter defaultCenter] postNotificationName:kDidStartRecordingNotification object:self];
         [self postCurrentDistance];
     }

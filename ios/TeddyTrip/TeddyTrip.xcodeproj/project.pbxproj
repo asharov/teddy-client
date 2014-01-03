@@ -29,6 +29,8 @@
 		C027C04E184E6DD40035268D /* TTTripStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C027C04D184E6DD40035268D /* TTTripStoreTests.m */; };
 		C027C051184E6E440035268D /* TTTripStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C027C050184E6E440035268D /* TTTripStore.m */; };
 		C027C057184E740C0035268D /* TTTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = C027C056184E740C0035268D /* TTTrip.m */; };
+		CEA452031876C1C0000C364F /* TTMockTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA452021876C1C0000C364F /* TTMockTimeProvider.m */; };
+		CEA452061876C694000C364F /* TTTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA452051876C694000C364F /* TTTimeProvider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,10 @@
 		C027C050184E6E440035268D /* TTTripStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTripStore.m; sourceTree = "<group>"; };
 		C027C055184E740C0035268D /* TTTrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTrip.h; sourceTree = "<group>"; };
 		C027C056184E740C0035268D /* TTTrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTrip.m; sourceTree = "<group>"; };
+		CEA452011876C1C0000C364F /* TTMockTimeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMockTimeProvider.h; sourceTree = "<group>"; };
+		CEA452021876C1C0000C364F /* TTMockTimeProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMockTimeProvider.m; sourceTree = "<group>"; };
+		CEA452041876C694000C364F /* TTTimeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTimeProvider.h; sourceTree = "<group>"; };
+		CEA452051876C694000C364F /* TTTimeProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTimeProvider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +159,8 @@
 				C027C050184E6E440035268D /* TTTripStore.m */,
 				C027C055184E740C0035268D /* TTTrip.h */,
 				C027C056184E740C0035268D /* TTTrip.m */,
+				CEA452041876C694000C364F /* TTTimeProvider.h */,
+				CEA452051876C694000C364F /* TTTimeProvider.m */,
 			);
 			path = TeddyTrip;
 			sourceTree = "<group>";
@@ -176,6 +184,8 @@
 				C027C045184D2B670035268D /* TTMockLocationProvider.h */,
 				C027C046184D2B670035268D /* TTMockLocationProvider.m */,
 				C027C04D184E6DD40035268D /* TTTripStoreTests.m */,
+				CEA452011876C1C0000C364F /* TTMockTimeProvider.h */,
+				CEA452021876C1C0000C364F /* TTMockTimeProvider.m */,
 			);
 			path = TeddyTripTests;
 			sourceTree = "<group>";
@@ -290,6 +300,7 @@
 				C027C051184E6E440035268D /* TTTripStore.m in Sources */,
 				C027C057184E740C0035268D /* TTTrip.m in Sources */,
 				C027C044184D2B2B0035268D /* TTLocationProvider.m in Sources */,
+				CEA452061876C694000C364F /* TTTimeProvider.m in Sources */,
 				C027C041184B30CE0035268D /* TTRecorder.m in Sources */,
 				C027C04C184E6C5D0035268D /* TTTripListViewController.m in Sources */,
 				C027C017184550C00035268D /* main.m in Sources */,
@@ -304,6 +315,7 @@
 				C027C036184550C00035268D /* TTRecorderTests.m in Sources */,
 				C027C047184D2B670035268D /* TTMockLocationProvider.m in Sources */,
 				C027C04E184E6DD40035268D /* TTTripStoreTests.m in Sources */,
+				CEA452031876C1C0000C364F /* TTMockTimeProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

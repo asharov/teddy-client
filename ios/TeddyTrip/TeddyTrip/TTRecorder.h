@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TTLocationProvider.h"
+#import "TTTimeProvider.h"
 
 static NSString * const kDidStartRecordingNotification = @"TTDidStartRecording";
 static NSString * const kDidStopRecordingNotification = @"TTDidStopRecording";
@@ -21,7 +22,7 @@ static NSString * const kUserInfoDistanceKey = @"distance";
 @property (readonly) uint64_t durationMilliseconds;
 @property (readonly) NSArray *trace;
 
-- (id)initWithLocationProvider:(TTLocationProvider *)locationProvider;
+- (id)initWithLocationProvider:(TTLocationProvider *)locationProvider timeProvider:(TTTimeProvider *)timeProvider;
 
 - (void)start;
 - (void)stop;
